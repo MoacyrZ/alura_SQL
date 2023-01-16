@@ -1,0 +1,49 @@
+USE sucos;
+
+CREATE TABLE tabela_de_vendedores(
+MATRICULA VARCHAR (5) ,
+NOME VARCHAR (100) ,
+PERCENTUAL_COMISSAO FLOAT);
+
+INSERT INTO tabela_de_vendedores (
+MATRICULA, NOME, PERCENTUAL_COMISSAO)
+VALUES('00233', 'João Geraldo da Fonseca', '10');
+INSERT INTO tabela_de_vendedores (
+MATRICULA, NOME, PERCENTUAL_COMISSAO)
+VALUES('00235', 'Márcio Almeida Silva', '8');
+INSERT INTO tabela_de_vendedores (
+MATRICULA, NOME, PERCENTUAL_COMISSAO)
+VALUES('00236', 'Cláudia Morais', '8');
+
+UPDATE tabela_de_vendedores SET PERCENTUAL_COMISSAO = 11
+WHERE MATRICULA = '00236';
+UPDATE tabela_de_vendedores SET NOME = 'José Geraldo da Fonseca'
+WHERE MATRICULA = '00233';
+DELETE FROM tabela_de_vendedores WHERE MATRICULA = '00233';
+
+ALTER TABLE tabela_de_vendedores ADD COLUMN (DATA_ADMISSAO DATE);
+ALTER TABLE tabela_de_vendedores ADD COLUMN (DE_FERIAS BIT(1));
+
+ALTER TABLE tabela_de_vendedores ADD PRIMARY KEY (MATRICULA);
+
+UPDATE tabela_de_vendedores SET DATA_ADMISSAO = '2014/08/15', DE_FERIAS = 0
+WHERE MATRICULA = '00235';
+UPDATE tabela_de_vendedores SET DATA_ADMISSAO = '2013/09/17', DE_FERIAS = 1
+WHERE MATRICULA = '00236';
+
+INSERT INTO tabela_de_vendedores (
+MATRICULA, NOME, PERCENTUAL_COMISSAO, DATA_ADMISSAO, DE_FERIAS)
+VALUES('00237', 'Roberta Martins', '11', '2017/03/18', 1);
+INSERT INTO tabela_de_vendedores (
+MATRICULA, NOME, PERCENTUAL_COMISSAO, DATA_ADMISSAO, DE_FERIAS)
+VALUES('00238', 'Péricles Alves', '11', '2016/08/21', 0);
+
+SELECT NOME, MATRICULA FROM tabela_de_vendedores;
+
+SELECT * FROM tabela_de_vendedores WHERE NOME = 'Claudia Morais';
+
+SELECT * FROM tabela_de_vendedores WHERE PERCENTUAL_COMISSAO > '10';
+
+SELECT * FROM tabela_de_vendedores WHERE YEAR(DATA_ADMISSAO) >= 2016;
+
+SELECT * FROM tabela_de_vendedores WHERE YEAR(DATA_ADMISSAO) <= 2016 AND DE_FERIAS = 1;
